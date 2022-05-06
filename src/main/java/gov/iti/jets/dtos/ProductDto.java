@@ -99,8 +99,8 @@ public class ProductDto {
 
     @Override
     public String toString() {
-        return "ProductDto [categories=" + categories.toString() + ", description=" + description + ", id=" + id + ", name=" + name
-                + ", price=" + price + ", quantity=" + quantity + "]";
+        return "{categories=" + categories.toString() + ", description=" + description + ", id=" + id + ", name=" + name
+                + ", price=" + price + ", quantity=" + quantity + "}\n\n";
     }
 
     

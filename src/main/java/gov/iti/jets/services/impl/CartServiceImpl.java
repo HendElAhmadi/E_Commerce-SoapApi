@@ -23,11 +23,11 @@ public class CartServiceImpl implements CartService {
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
-    public List<CartDto> getAllcarts() {
+    public String getAllcarts() {
 
         TypedQuery<CartProducts> query = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
         List<CartDto> cartDtoList = new ArrayList<CartDto>();
-        try {
+        
 
             List<CartProducts> cartProductsList = query.getResultList();
             CartDto cartDto;
@@ -44,21 +44,25 @@ public class CartServiceImpl implements CartService {
                 cartDtoList.add(cartDto);
             }
 
-            return cartDtoList;
+            if(cartDtoList.size()==0){
+                
+                return "there are no carts";
 
-        } catch (Exception e) {
+            }
 
-            return cartDtoList;
-        }
+            return "\n Carts : \n"+cartDtoList;
+
+        
     }
 
     @Override
-    public List<UserCart> getUserCart(int userId) {
+    public String getUserCart(int userId) {
+
         TypedQuery<CartProducts> query = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
 
         List<CartProducts> cartProductsList = query.getResultList();
         UserCart userCart;
-        List<UserCart> userCartList = new ArrayList<UserCart>();
+        List<Object> userCartList = new ArrayList<Object>();
         for (CartProducts cartProducts : cartProductsList) {
             if (cartProducts.getCartId().getUserId() == userId) {
 
@@ -73,8 +77,12 @@ public class CartServiceImpl implements CartService {
             }
 
         }
+        if (userCartList.size() == 0) {
 
-        return userCartList;
+            return "cart is empty";
+        }
+
+        return "\n user's cart: \n" + userCartList.toString();
     }
 
     @Override
@@ -164,6 +172,34 @@ public class CartServiceImpl implements CartService {
         entityTransaction.commit();
         entityManager2.close();
         return "Cart is deleted succesfully";
+
+    }
+
+   @Override
+    public String deleteProductInCart( int userId, int pId) {
+
+        EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+
+        TypedQuery<CartProducts> query = entityManager2
+                .createQuery("select C from CartProducts C where C.user.id= :id and C.product.id= :pid", CartProducts.class)
+                .setParameter("id", userId)
+                .setParameter("pid", pId);
+        if (query.getResultList().size() == 0) {
+            return "there is no product to delete";
+        }
+        List<CartProducts> cartProductsList = query.getResultList();
+
+        EntityTransaction entityTransaction = entityManager2.getTransaction();
+        entityTransaction.begin();
+        for (CartProducts cartProducts : cartProductsList) {
+
+            entityManager2.remove(cartProducts);
+
+        }
+
+        entityTransaction.commit();
+        entityManager2.close();
+        return "product is deleted succesfully form cart";
 
     }
 

@@ -21,10 +21,10 @@ public class UserServiceImpl implements UserService {
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
-    public List<UserDto> getAllUsers() {
+    public String getAllUsers() {
         TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
         List<UserDto> userDtoList = new ArrayList<UserDto>();
-        try {
+        
 
             List<User> userList = query.getResultList();
             UserDto userDto;
@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
                 userDto.setPassword(user.getPassword());
                 userDtoList.add(userDto);
             }
+            if (userDtoList.size() == 0) {
+                return "There are no users";
+            }
 
-            return userDtoList;
+            return "\n All users : \n"+userDtoList;
 
-        } catch (Exception e) {
-
-            return userDtoList;
-        }
+        
     }
 
     @Override

@@ -1,9 +1,5 @@
 package gov.iti.jets.services;
 
-import java.util.List;
-
-import gov.iti.jets.dtos.CartDto;
-import gov.iti.jets.dtos.UserCart;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 
@@ -11,15 +7,18 @@ import jakarta.jws.WebService;
 public interface CartService {
 
     @WebMethod
-    public List<CartDto> getAllcarts();
+    public String getAllcarts();
 
     @WebMethod
-    public List<UserCart> getUserCart(int userId);
+    public String getUserCart(int userId);
 
     @WebMethod
     public String addToCart(int userId, String productName, int quantity);
 
     @WebMethod
     public String deleteCart(int userId);
+
+    @WebMethod
+    public String deleteProductInCart(int userId,int pId) ;
 
 }

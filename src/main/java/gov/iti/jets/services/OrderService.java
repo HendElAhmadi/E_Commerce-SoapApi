@@ -1,16 +1,13 @@
 package gov.iti.jets.services;
 
-import java.util.List;
-
-import gov.iti.jets.dtos.OrderDto;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 
 @WebService
 public interface OrderService {
-    
+
     @WebMethod
-    public List<OrderDto> getAllOrders();
+    public String getAllOrders();
 
     @WebMethod
     public Object getOrderById(int userId);

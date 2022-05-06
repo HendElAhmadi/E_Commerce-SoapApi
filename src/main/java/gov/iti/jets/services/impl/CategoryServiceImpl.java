@@ -22,42 +22,42 @@ public class CategoryServiceImpl implements CategoryService {
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
-    public List<CategoryDto> getAllCategories() {
+    public String getAllCategories() {
 
         TypedQuery<Category> query = entityManager.createQuery("select c from Category c", Category.class);
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
-        try {
-            List<Category> categoryList = query.getResultList();
-            CategoryDto categoryDto;
 
-            for (Category category : categoryList) {
-                categoryDto = new CategoryDto();
+        List<Category> categoryList = query.getResultList();
+        CategoryDto categoryDto;
 
-                categoryDto.setId(category.getId());
-                categoryDto.setDescription(category.getDescription());
-                categoryDto.setValue(category.getValue());
-                List<ProductDto> productDtoList = new ArrayList<ProductDto>();
-                for (Product product : category.getProducts()) {
-                    ProductDto productDto = new ProductDto();
+        for (Category category : categoryList) {
+            categoryDto = new CategoryDto();
 
-                    productDto.setId(product.getId());
-                    productDto.setName(product.getName());
-                    productDto.setCategories(product.getCategories());
-                    productDto.setDescription(product.getDescription());
-                    productDto.setPrice(product.getPrice());
-                    productDto.setQuantity(product.getQuantity());
-                    productDtoList.add(productDto);
-                }
-                categoryDto.setProducts(productDtoList);
+            categoryDto.setId(category.getId());
+            categoryDto.setDescription(category.getDescription());
+            categoryDto.setValue(category.getValue());
+            List<ProductDto> productDtoList = new ArrayList<ProductDto>();
+            for (Product product : category.getProducts()) {
+                ProductDto productDto = new ProductDto();
 
-                categoryDtoList.add(categoryDto);
+                productDto.setId(product.getId());
+                productDto.setName(product.getName());
+                productDto.setCategories(product.getCategories());
+                productDto.setDescription(product.getDescription());
+                productDto.setPrice(product.getPrice());
+                productDto.setQuantity(product.getQuantity());
+                productDtoList.add(productDto);
             }
+            categoryDto.setProducts(productDtoList);
 
-            return categoryDtoList;
-        } catch (Exception e) {
-
-            return categoryDtoList;
+            categoryDtoList.add(categoryDto);
         }
+        if (categoryDtoList.size() == 0) {
+            return "There are no categories";
+        }
+
+        return "\n All categories : \n" + categoryDtoList;
+
     }
 
     @Override
@@ -94,7 +94,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<ProductDto> getProducts(Integer id) {
+    public String getProducts(Integer id) {
         TypedQuery<Category> query = entityManager
                 .createQuery("select c from Category c where c.id= :id ", Category.class)
                 .setParameter("id", id);
@@ -112,11 +112,12 @@ public class CategoryServiceImpl implements CategoryService {
                 productDto.setPrice(product.getPrice());
                 productDtoList.add(productDto);
             }
+            
 
-            return productDtoList;
+            return "\n products list : \n" + productDtoList;
         } catch (Exception e) {
 
-            return productDtoList;
+            return "There are no products";
         }
     }
 

@@ -24,41 +24,40 @@ public class OrderServiceImpl implements OrderService {
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
-    public List<OrderDto> getAllOrders() {
+    public String getAllOrders() {
         List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
-        try {
-            TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
-            List<Order> orderList = query.getResultList();
-            OrderDto orderDto;
 
-            for (Order order : orderList) {
-                orderDto = new OrderDto();
-                orderDto.setId(order.getId());
-                orderDto.setTotalPrice(order.getTotalPrice());
-                User user = order.getUser();
-                UserDto userDto = new UserDto();
-                userDto.setId(user.getId());
-                userDto.setUserType(user.getUserType());
-                userDto.setUserName(user.getUserName());
-                userDto.setEmail(user.getEmail());
-                userDto.setPhoneNumber(user.getPhoneNumber());
-                userDto.setWallet(user.getWallet());
-                userDto.setPassword(user.getPassword());
-                orderDto.setUserDto(userDto);
-                orderDtoList.add(orderDto);
-            }
+        TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
+        List<Order> orderList = query.getResultList();
+        OrderDto orderDto;
 
-            return orderDtoList;
-
-        } catch (Exception e) {
-
-            return orderDtoList;
+        for (Order order : orderList) {
+            orderDto = new OrderDto();
+            orderDto.setId(order.getId());
+            orderDto.setTotalPrice(order.getTotalPrice());
+            User user = order.getUser();
+            UserDto userDto = new UserDto();
+            userDto.setId(user.getId());
+            userDto.setUserType(user.getUserType());
+            userDto.setUserName(user.getUserName());
+            userDto.setEmail(user.getEmail());
+            userDto.setPhoneNumber(user.getPhoneNumber());
+            userDto.setWallet(user.getWallet());
+            userDto.setPassword(user.getPassword());
+            orderDto.setUserDto(userDto);
+            orderDtoList.add(orderDto);
         }
+        if (orderDtoList.size() == 0) {
+            return "There are no orders!!";
+        }
+
+        return "\n All orders : \n" + orderDtoList;
+
     }
 
     @Override
     public Object getOrderById(int userId) {
-        
+
         try {
             TypedQuery<Order> query = entityManager
                     .createQuery("select o from Order o where o.user.id= :id ", Order.class)
@@ -77,13 +76,9 @@ public class OrderServiceImpl implements OrderService {
             userDto.setWallet(user.getWallet());
             userDto.setPassword(user.getPassword());
             orderDto.setUserDto(userDto);
-            
-            
 
             return orderDto;
         } catch (Exception e) {
-
-            
 
             return "There is no order!";
         }
@@ -91,12 +86,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public String makeOrder(int userId) {
-        
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         TypedQuery<User> query1 = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
-        .setParameter("id", userId);
-        if(query1.getResultList().size()==0){
+                .setParameter("id", userId);
+        if (query1.getResultList().size() == 0) {
             return "user doesn't exist!!";
         }
 

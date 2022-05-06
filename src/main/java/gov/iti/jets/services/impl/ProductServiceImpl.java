@@ -5,6 +5,7 @@ import java.util.List;
 
 import gov.iti.jets.dtos.CategoryDto;
 import gov.iti.jets.dtos.ProductDto;
+import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Category;
 import gov.iti.jets.persistence.entities.Product;
 import gov.iti.jets.persistence.util.ManagerFactory;
@@ -22,30 +23,31 @@ public class ProductServiceImpl implements ProductService {
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     @Override
-    public List<ProductDto> getAllProducts() {
+    public String getAllProducts() {
 
         TypedQuery<Product> query = entityManager.createQuery("select p from Product p", Product.class);
         List<ProductDto> productDtoList = new ArrayList<ProductDto>();
-        try {
-            List<Product> productList = query.getResultList();
-            ProductDto productDto;
-            for (Product product : productList) {
-                productDto = new ProductDto();
 
-                productDto.setId(product.getId());
-                productDto.setName(product.getName());
-                productDto.setCategories(product.getCategories());
-                productDto.setQuantity(product.getQuantity());
-                productDto.setDescription(product.getDescription());
-                productDto.setPrice(product.getPrice());
-                productDtoList.add(productDto);
-            }
+        List<Product> productList = query.getResultList();
+        ProductDto productDto;
+        for (Product product : productList) {
+            productDto = new ProductDto();
 
-            return productDtoList;
-        } catch (Exception e) {
-
-            return productDtoList;
+            productDto.setId(product.getId());
+            productDto.setName(product.getName());
+            productDto.setCategories(product.getCategories());
+            productDto.setQuantity(product.getQuantity());
+            productDto.setDescription(product.getDescription());
+            productDto.setPrice(product.getPrice());
+            productDtoList.add(productDto);
         }
+
+        if (productDtoList.size() == 0) {
+            return "There are no products";
+        }
+
+        return "\n All products : \n" + productDtoList;
+
     }
 
     @Override
@@ -73,10 +75,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Object getProductByName( String name) {
+    public Object getProductByName(String name) {
         TypedQuery<Product> query = entityManager
                 .createQuery("select p from Product p where  p.name= :name", Product.class)
-                
+
                 .setParameter("name", name);
         try {
             Product product = query.getSingleResult();
@@ -92,16 +94,20 @@ public class ProductServiceImpl implements ProductService {
             return productDto;
         } catch (Exception e) {
 
-            return "There is no products!";
+            return "There is no product with this name!";
         }
     }
 
     @Override
-    public List<CategoryDto> getCategories(Integer id) {
-        TypedQuery<Product> query = entityManager.createQuery("select p from Product p where p.id= :id ", Product.class)
-                .setParameter("id", id);
-        List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
+    public String getCategories(Integer id) {
+
         try {
+
+            TypedQuery<Product> query = entityManager
+                    .createQuery("select p from Product p where p.id= :id ", Product.class)
+                    .setParameter("id", id);
+            List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
+
             Product product = query.getSingleResult();
 
             for (Category category : product.getCategories()) {
@@ -109,15 +115,19 @@ public class ProductServiceImpl implements ProductService {
                 categoryDto.setId(category.getId());
                 categoryDto.setDescription(category.getDescription());
                 categoryDto.setValue(category.getValue());
-
                 categoryDtoList.add(categoryDto);
             }
+            if (categoryDtoList.size() == 0) {
+                return "There are no categories";
+            }
 
-            return categoryDtoList;
+            return "\n All categories : \n" + categoryDtoList;
         } catch (Exception e) {
 
-            return categoryDtoList;
+            return "There is no product with this id";
+
         }
+
     }
 
     @Override
@@ -158,6 +168,19 @@ public class ProductServiceImpl implements ProductService {
             EntityTransaction entityTransaction = entityManager2.getTransaction();
             entityTransaction.begin();
             Product product = query.getSingleResult();
+
+            TypedQuery<CartProducts> query3 = entityManager2
+                    .createQuery("select C from CartProducts C where C.product.id= :id ", CartProducts.class)
+                    .setParameter("id", id);
+
+            if (query3.getResultList().size() != 0) {
+                List<CartProducts>CartProductsList=query3.getResultList();
+                List<Integer>cartIds=new ArrayList<>();
+                for (CartProducts cartProducts:CartProductsList) {
+                    cartIds.add(cartProducts.getCartId().getUserId());
+                }
+                return "Here are the users Ids who use this product: "+cartIds+"\n ,you should delete theirs carts first";
+            }
 
             entityManager2.remove(product);
             entityTransaction.commit();

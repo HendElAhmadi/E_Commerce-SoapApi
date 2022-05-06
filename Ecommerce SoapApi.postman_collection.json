@@ -515,6 +515,42 @@
 			"response": []
 		},
 		{
+			"name": "deleteProductInCart",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteProductInCart>\r\n        <arg0>9</arg0>\r\n        <arg1>9</arg1>\r\n        </x:deleteProductInCart>\r\n    </soap:Body>\r\n</soap:Envelope>"
+				},
+				"url": {
+					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9797",
+					"path": [
+						"SoapE_CommerceService",
+						"ws",
+						"cartService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "getAllCategories",
 			"request": {
 				"method": "POST",
@@ -569,7 +605,7 @@
 			"response": []
 		},
 		{
-			"name": "getProducts",
+			"name": "getProducts for category",
 			"request": {
 				"method": "POST",
 				"header": [

@@ -3,7 +3,6 @@ package gov.iti.jets.persistence.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,46 +14,43 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "users", catalog = "ecommerce_schema")
 
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id",length = 10)
-    
+    @Column(name = "user_id", length = 10)
+
     private int id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
     private UserType userType;
 
-    @Column(name="user_name")
+    @Column(name = "user_name")
     private String userName;
 
-    
     private String email;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
     private double wallet;
-   
+
     private String password;
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="user")
-    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+
     private List<CartProducts> cartProductsList = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="user")
-   
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+
     private List<Order> orderList = new ArrayList<>();
 
-    public User(){
+    public User() {
 
     }
-    
 
     public User(int id, UserType userType, String userName, String email, String phoneNumber, double wallet,
             String password) {
@@ -66,8 +62,6 @@ public class User {
         this.wallet = wallet;
         this.password = password;
     }
-
-    
 
     public int getId() {
         return id;
@@ -125,7 +119,6 @@ public class User {
         this.password = password;
     }
 
-   
     public List<CartProducts> getCartProductsList() {
         return cartProductsList;
     }
@@ -134,7 +127,6 @@ public class User {
         this.cartProductsList = cartProductsList;
     }
 
-    
     public List<Order> getOrderList() {
         return orderList;
     }
@@ -149,5 +141,4 @@ public class User {
                 + ", userName=" + userName + ", userType=" + userType + ", wallet=" + wallet + "]";
     }
 
-    
 }

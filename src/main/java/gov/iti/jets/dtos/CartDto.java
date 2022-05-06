@@ -1,21 +1,15 @@
 package gov.iti.jets.dtos;
 
-
-
 import jakarta.xml.bind.annotation.XmlRootElement;
-
 
 @XmlRootElement
 public class CartDto {
-    
+
     private int cartUserId;
 
     private int cartProductId;
 
-  
     private int totalPrice;
-
-  
 
     private int quantity;
 
@@ -23,7 +17,7 @@ public class CartDto {
         this.cartUserId = cartUserId;
         this.cartProductId = cartProductId;
         this.totalPrice = totalPrice;
-      
+
         this.quantity = quantity;
     }
 
@@ -54,8 +48,6 @@ public class CartDto {
         this.totalPrice = totalPrice;
     }
 
-  
-
     public int getQuantity() {
         return quantity;
     }
@@ -66,11 +58,8 @@ public class CartDto {
 
     @Override
     public String toString() {
-        return "CartDto [cartProductId=" + cartProductId + ", cartUserId=" + cartUserId + ", quantity=" + quantity
-                + ", totalPrice=" + totalPrice + "]";
+        return "{cartProductId=" + cartProductId + ", cartUserId=" + cartUserId + ", quantity=" + quantity
+                + ", totalPrice=" + totalPrice + "}\n\n";
     }
 
-  
-
-   
 }

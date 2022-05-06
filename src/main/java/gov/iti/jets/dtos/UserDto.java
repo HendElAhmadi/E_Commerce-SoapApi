@@ -5,25 +5,20 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class UserDto {
-   
-    
-    private int id;
 
+    private int id;
 
     private UserType userType;
 
-    
     private String userName;
 
     private String email;
 
-
     private String phoneNumber;
 
     private double wallet;
-   
-    private String password;
 
+    private String password;
 
     public UserDto() {
     }
@@ -97,7 +92,7 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "UserDto [email=" + email + ", id=" + id + ", password=" + password + ", phoneNumber=" + phoneNumber
-                + ", userName=" + userName + ", userType=" + userType + ", wallet=" + wallet + "]";
-    } 
+        return "{email=" + email + ", id=" + id + ", password=" + password + ", phoneNumber=" + phoneNumber
+                + ", userName=" + userName + ", userType=" + userType + ", wallet=" + wallet + "}\n\n";
+    }
 }

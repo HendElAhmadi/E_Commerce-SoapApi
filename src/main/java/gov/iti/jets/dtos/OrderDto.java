@@ -1,13 +1,10 @@
 package gov.iti.jets.dtos;
 
-
 import jakarta.xml.bind.annotation.XmlRootElement;
-
 
 @XmlRootElement
 public class OrderDto {
 
-    
     private int id;
 
     private UserDto userDto;
@@ -49,6 +46,6 @@ public class OrderDto {
 
     @Override
     public String toString() {
-        return "OrderDto [id=" + id + ", totalPrice=" + totalPrice + ", userDto=" + userDto.hashCode() + "]";
+        return "{id=" + id + ", totalPrice=" + totalPrice + ", userDto=" + userDto.hashCode() + "}\n\n";
     }
 }
