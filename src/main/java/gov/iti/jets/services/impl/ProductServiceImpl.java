@@ -170,7 +170,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String updateProduct(int id, int quantity) {
+    public String updateProductQuantity(int id, int quantity) {
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
         TypedQuery<Product> query = entityManager2
                 .createQuery("select p from Product p where p.id= :id ", Product.class)

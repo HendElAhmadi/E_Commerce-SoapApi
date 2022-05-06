@@ -28,7 +28,7 @@ public interface ProductService {
     public String deleteProduct( int id) ;
 
     @WebMethod
-    public String updateProduct(int id,int quantity) ;
+    public String updateProductQuantity(int id,int quantity) ;
 
  
 }

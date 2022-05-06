@@ -38,6 +38,37 @@
 			"response": []
 		},
 		{
+			"name": "upadateUserWallet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9797",
+					"path": [
+						"SoapE_CommerceService",
+						"ws",
+						"userService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "getAll products",
 			"request": {
 				"method": "POST",
