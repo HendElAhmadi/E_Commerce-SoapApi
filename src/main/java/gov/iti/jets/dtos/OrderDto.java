@@ -46,6 +46,6 @@ public class OrderDto {
 
     @Override
     public String toString() {
-        return "{id=" + id + ", totalPrice=" + totalPrice + ", userDto=" + userDto.hashCode() + "}\n\n";
+        return "{id=" + id + ", totalPrice=" + totalPrice + ", userID=" + userDto.getId()+ "}\n\n";
     }
 }

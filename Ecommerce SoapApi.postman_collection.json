@@ -349,6 +349,33 @@
 			"response": []
 		},
 		{
+			"name": "updateOrder by userId",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9797",
+					"path": [
+						"SoapE_CommerceService",
+						"ws",
+						"orderService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "checkout byUser id",
 			"request": {
 				"method": "POST",

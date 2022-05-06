@@ -51,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Object getProduct(int id) {
+    public String getProduct(int id) {
 
         TypedQuery<Product> query = entityManager.createQuery("select p from Product p where p.id= :id ", Product.class)
                 .setParameter("id", id);
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDescription(product.getDescription());
             productDto.setPrice(product.getPrice());
 
-            return productDto;
+            return productDto.toString();
         } catch (Exception e) {
 
             return "There is no products!";
@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Object getProductByName(String name) {
+    public String getProductByName(String name) {
         TypedQuery<Product> query = entityManager
                 .createQuery("select p from Product p where  p.name= :name", Product.class)
 
@@ -91,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDescription(product.getDescription());
             productDto.setPrice(product.getPrice());
 
-            return productDto;
+            return productDto.toString();
         } catch (Exception e) {
 
             return "There is no product with this name!";

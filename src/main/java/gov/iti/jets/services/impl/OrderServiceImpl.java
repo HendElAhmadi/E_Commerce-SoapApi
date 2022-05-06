@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Object getOrderById(int userId) {
+    public String getOrderById(int userId) {
 
         try {
             TypedQuery<Order> query = entityManager
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
             userDto.setPassword(user.getPassword());
             orderDto.setUserDto(userDto);
 
-            return orderDto;
+            return orderDto.toString();
         } catch (Exception e) {
 
             return "There is no order!";
@@ -206,6 +206,58 @@ public class OrderServiceImpl implements OrderService {
 
             return "There is no order to delete!";
         }
+    }
+
+    @Override
+    public String updateOrder( int userId) {
+
+       
+        TypedQuery<User> query1 = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
+                .setParameter("id", userId);
+        if (query1.getResultList().size() == 0) {
+            return "user doesn't exist!!";
+        }
+        TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.user.id= :id ", Order.class)
+                .setParameter("id", userId);
+        if (query.getResultList().size() == 0) {
+
+            return "order doesn't exist";
+        }
+
+        List<CartProducts> cartProductsList = getUserCart(entityManager);
+        int totalPrice = 0;
+        for (CartProducts cartProducts : cartProductsList) {
+            if (cartProducts.getCartId().getUserId() == userId) {
+
+                int productQuantity = cartProducts.getProduct().getQuantity();
+                if (productQuantity == 0) {
+
+                    return "we are sorry but the product is out of stock !!";
+                }
+                if (productQuantity < cartProducts.getQuantity()) {
+
+                    return "the" + cartProducts.getProduct().getName() + " product quantity\n" +
+                            "in stock is only : " + productQuantity;
+                }
+                totalPrice += cartProducts.getTotalPrice();
+            }
+
+        }
+        if (totalPrice == 0) {
+
+            return "cart is empty";
+        }
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Order order = query.getSingleResult();
+        order.setTotalPrice(totalPrice);
+        entityManager.persist(order);
+        entityTransaction.commit();
+
+        
+        return "Order is updated successfully";
+
     }
 
     private List<CartProducts> getUserCart(EntityManager entityManager) {

@@ -12,7 +12,7 @@ public interface UserService {
     public String getAllUsers();
 
     @WebMethod
-    public Object getUserById(int id);
+    public String getUserById(int id);
 
     @WebMethod
     public String createUser(UserDto userDto);

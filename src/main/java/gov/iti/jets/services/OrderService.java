@@ -10,7 +10,7 @@ public interface OrderService {
     public String getAllOrders();
 
     @WebMethod
-    public Object getOrderById(int userId);
+    public String getOrderById(int userId);
 
     @WebMethod
     public String makeOrder(int userId);
@@ -20,4 +20,7 @@ public interface OrderService {
 
     @WebMethod
     public String deleteOrder(int userId);
+
+    @WebMethod
+    public String updateOrder(int userId) ;
 }

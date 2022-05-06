@@ -7,6 +7,7 @@ import gov.iti.jets.dtos.CartDto;
 import gov.iti.jets.dtos.UserCart;
 import gov.iti.jets.persistence.entities.CartId;
 import gov.iti.jets.persistence.entities.CartProducts;
+import gov.iti.jets.persistence.entities.Order;
 import gov.iti.jets.persistence.entities.Product;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.CartService;
@@ -27,32 +28,30 @@ public class CartServiceImpl implements CartService {
 
         TypedQuery<CartProducts> query = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
         List<CartDto> cartDtoList = new ArrayList<CartDto>();
-        
 
-            List<CartProducts> cartProductsList = query.getResultList();
-            CartDto cartDto;
+        List<CartProducts> cartProductsList = query.getResultList();
+        CartDto cartDto;
 
-            for (CartProducts cartProducts : cartProductsList) {
+        for (CartProducts cartProducts : cartProductsList) {
 
-                cartDto = new CartDto();
+            cartDto = new CartDto();
 
-                cartDto.setCartProductId(cartProducts.getCartId().getProductId());
-                cartDto.setCartUserId(cartProducts.getCartId().getUserId());
-                cartDto.setTotalPrice(cartProducts.getTotalPrice());
-                cartDto.setQuantity(cartProducts.getQuantity());
+            cartDto.setCartProductId(cartProducts.getCartId().getProductId());
+            cartDto.setCartUserId(cartProducts.getCartId().getUserId());
+            cartDto.setTotalPrice(cartProducts.getTotalPrice());
+            cartDto.setQuantity(cartProducts.getQuantity());
 
-                cartDtoList.add(cartDto);
-            }
+            cartDtoList.add(cartDto);
+        }
 
-            if(cartDtoList.size()==0){
-                
-                return "there are no carts";
+        if (cartDtoList.size() == 0) {
 
-            }
+            return "there are no carts";
 
-            return "\n Carts : \n"+cartDtoList;
+        }
 
-        
+        return "\n Carts : \n" + cartDtoList;
+
     }
 
     @Override
@@ -175,32 +174,37 @@ public class CartServiceImpl implements CartService {
 
     }
 
-   @Override
-    public String deleteProductInCart( int userId, int pId) {
+    @Override
+    public String deleteProductInCart(int userId, int pId) {
 
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
         TypedQuery<CartProducts> query = entityManager2
-                .createQuery("select C from CartProducts C where C.user.id= :id and C.product.id= :pid", CartProducts.class)
+                .createQuery("select C from CartProducts C where C.user.id= :id and C.product.id= :pid",
+                        CartProducts.class)
                 .setParameter("id", userId)
                 .setParameter("pid", pId);
         if (query.getResultList().size() == 0) {
             return "there is no product to delete";
         }
+
         List<CartProducts> cartProductsList = query.getResultList();
 
         EntityTransaction entityTransaction = entityManager2.getTransaction();
         entityTransaction.begin();
         for (CartProducts cartProducts : cartProductsList) {
 
-            entityManager2.remove(cartProducts);
+        entityManager2.remove(cartProducts);
 
         }
 
         entityTransaction.commit();
         entityManager2.close();
-        return "product is deleted succesfully form cart";
+        return "product is deleted succesfully form cart , AND If you have an order you can update it now !!";
 
     }
+       
+
+    
 
 }

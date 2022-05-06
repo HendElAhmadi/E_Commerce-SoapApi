@@ -15,7 +15,7 @@ public interface CategoryService {
     public String getAllCategories();
 
     @WebMethod
-    public Object getCategory(int id);
+    public String getCategory(int id);
 
     @WebMethod
     public String getProducts(Integer id);

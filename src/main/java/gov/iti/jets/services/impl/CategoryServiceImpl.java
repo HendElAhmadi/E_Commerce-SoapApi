@@ -61,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Object getCategory(int id) {
+    public String getCategory(int id) {
         TypedQuery<Category> query = entityManager
                 .createQuery("select c from Category c where c.id= :id ", Category.class)
                 .setParameter("id", id);
@@ -86,7 +86,7 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryDto.setProducts(productDtoList);
 
-            return categoryDto;
+            return categoryDto.toString();
         } catch (Exception e) {
 
             return "There is no category with this id!";

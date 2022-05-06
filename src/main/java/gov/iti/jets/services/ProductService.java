@@ -11,10 +11,10 @@ public interface ProductService {
     public String getAllProducts();
 
     @WebMethod
-    public Object getProduct(int id);
+    public String getProduct(int id);
 
     @WebMethod
-    public Object getProductByName(String name);
+    public String getProductByName(String name);
 
     @WebMethod
     public String getCategories(Integer id);

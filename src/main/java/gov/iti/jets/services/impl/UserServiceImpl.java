@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Object getUserById(int id) {
+    public String getUserById(int id) {
         TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
                 .setParameter("id", id);
 
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
             System.out.print(user);
 
-            return userDto;
+            return userDto.toString();
         } catch (Exception e) {
 
             return "There is no user with this id!";
