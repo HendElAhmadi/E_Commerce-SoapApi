@@ -43,8 +43,9 @@ This api gives E_Commerce services
     1.  get all orders
     2.  get user's order by userId
     3.  make order by user's id
-    4.  checkout by userId
-    5.  delete order by userId
+    4.  update order by user's id
+    5.  checkout by userId
+    6.  delete order by userId
 
 # Handled Cases:
 
@@ -54,7 +55,7 @@ This api gives E_Commerce services
     2. his money is decreased by the paid amount of money 
     3.the product quantity is decreased in stock
     
-2. User get a message that can't add a product if the quantity is not enough
+2. User get a message that he can't add a product if the quantity is not enough
 
 3. If two users added the same quantity in their order and one of them checked out:
     
