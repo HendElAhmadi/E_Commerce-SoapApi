@@ -36,6 +36,7 @@ This api gives E_Commerce services
     2.  get list of user's cart items by userId
     3.  add to cart by sending userId, productName, the required quantity of that product
     4.  delete cart by userId
+    5.  delete product from cart by userId and productId
 
 5. Order Service
 
@@ -64,6 +65,7 @@ This api gives E_Commerce services
     1. If he has an order a message is sent as order should be deleted first due to the association
     2. If his order is deleted but he has a cart a message is sent as the cart should be deleted first due to the association
     3. If he doesn't have neither cart nor order he is deleted successfully
+ 
 
 # Used in this project:
 
