@@ -55,7 +55,7 @@ This api gives E_Commerce services
     2. his money is decreased by the paid amount of money 
     3.the product quantity is decreased in stock
     
-2. User get a message that can't add a product if the quantity is not enough
+2. User get a message that he can't add a product if the quantity is not enough
 
 3. If two users added the same quantity in their order and one of them checked out:
     
