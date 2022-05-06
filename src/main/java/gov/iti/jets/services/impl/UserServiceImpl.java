@@ -5,7 +5,11 @@ import java.util.List;
 
 import gov.iti.jets.dtos.UserDto;
 import gov.iti.jets.dtos.UserWalletDto;
+import gov.iti.jets.persistence.entities.CartProducts;
+import gov.iti.jets.persistence.entities.Order;
 import gov.iti.jets.persistence.entities.User;
+import gov.iti.jets.persistence.entitiesservices.QueryService;
+import gov.iti.jets.persistence.entitiesservices.QueryServiceImpl;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.UserService;
 import jakarta.jws.WebService;
@@ -19,10 +23,11 @@ public class UserServiceImpl implements UserService {
 
     EntityManagerFactory entityManagerFactory = ManagerFactory.getEntityManagerFactory();
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
-
+    private QueryService queryService = new QueryServiceImpl();
+    
     @Override
     public String getAllUsers() {
-        TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
+        TypedQuery<User> query = queryService.getAllUsers(entityManager);
         List<UserDto> userDtoList = new ArrayList<UserDto>();
         
 
@@ -51,8 +56,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getUserById(int id) {
-        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
-                .setParameter("id", id);
+
+        TypedQuery<User> query = queryService.getUserById(entityManager, id);
 
         try {
             User user = query.getSingleResult();
@@ -80,8 +85,7 @@ public class UserServiceImpl implements UserService {
 
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
-        TypedQuery<User> query = entityManager2.createQuery("select u from User u where u.email= :email ", User.class)
-                .setParameter("email", userDto.getEmail());
+        TypedQuery<User> query = queryService.getUserEmail(entityManager2, userDto.getEmail());
         if (query.getResultList().size() != 0) {
             return "email already exists";
 
@@ -112,20 +116,31 @@ public class UserServiceImpl implements UserService {
     public String deleteUser(int id) {
 
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-        TypedQuery<User> query = entityManager2.createQuery("select u from User u where u.id= :id ", User.class)
-                .setParameter("id", id);
-        
-        try {   
+        TypedQuery<User> query =  queryService.getUserById(entityManager2, id);
+
+        try {
             EntityTransaction entityTransaction = entityManager2.getTransaction();
             entityTransaction.begin();
             User user = query.getSingleResult();
+
+            TypedQuery<Order> query2 = queryService.getOrderByUserId(entityManager2, id);
+            if (query2.getResultList().size() != 0) {
+
+                return "user has an order ,you should delete order first";
+            }
+
+            TypedQuery<CartProducts> query3 = queryService.getCartByUserId(entityManager2, id);
+            if (query3.getResultList().size() != 0) {
+
+                return "user has a cart ,you should delete the  user cart first";
+            }
 
             entityManager2.remove(user);
             entityTransaction.commit();
             entityManager2.close();
             return "user deleted successfully";
         } catch (Exception e) {
-            
+
             return "There is no user with this id!";
         }
     }
@@ -133,26 +148,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public String upadateUserWallet(int id,UserWalletDto userWalletDto){
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
-                .setParameter("id", id);
+        TypedQuery<User> query =  queryService.getUserById(entityManager, id);
 
         try {
             EntityTransaction entityTransaction = entityManager.getTransaction();
             entityTransaction.begin();
             User user = query.getSingleResult();
 
-            user.setWallet(user.getWallet()+userWalletDto.getUserWallet());
+            user.setWallet(user.getWallet() + userWalletDto.getUserWallet());
             entityManager.persist(user);
             entityTransaction.commit();
-            entityManager.close();
+           
             return "User wallet updated successfully";
         } catch (Exception e) {
 
             return "There is no user with this id!";
         }
 
-    
     }
 
 }

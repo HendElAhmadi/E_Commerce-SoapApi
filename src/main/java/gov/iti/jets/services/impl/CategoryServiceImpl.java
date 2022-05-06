@@ -7,6 +7,8 @@ import gov.iti.jets.dtos.CategoryDto;
 import gov.iti.jets.dtos.ProductDto;
 import gov.iti.jets.persistence.entities.Category;
 import gov.iti.jets.persistence.entities.Product;
+import gov.iti.jets.persistence.entitiesservices.QueryService;
+import gov.iti.jets.persistence.entitiesservices.QueryServiceImpl;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.CategoryService;
 import jakarta.jws.WebService;
@@ -20,11 +22,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final static EntityManagerFactory entityManagerFactory = ManagerFactory.getEntityManagerFactory();
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private QueryService queryService =new QueryServiceImpl();
 
     @Override
     public String getAllCategories() {
 
-        TypedQuery<Category> query = entityManager.createQuery("select c from Category c", Category.class);
+        TypedQuery<Category> query = queryService.getAllCategories(entityManager);
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
 
         List<Category> categoryList = query.getResultList();
@@ -62,9 +65,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String getCategory(int id) {
-        TypedQuery<Category> query = entityManager
-                .createQuery("select c from Category c where c.id= :id ", Category.class)
-                .setParameter("id", id);
+
+        TypedQuery<Category> query = queryService.getCategoryById(entityManager, id);
+
         try {
             Category category = query.getSingleResult();
             CategoryDto categoryDto = new CategoryDto();
@@ -95,9 +98,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String getProducts(Integer id) {
-        TypedQuery<Category> query = entityManager
-                .createQuery("select c from Category c where c.id= :id ", Category.class)
-                .setParameter("id", id);
+      TypedQuery<Category> query = queryService.getCategoryById(entityManager, id);
         List<ProductDto> productDtoList = new ArrayList<ProductDto>();
         try {
             Category category = query.getSingleResult();
@@ -125,9 +126,7 @@ public class CategoryServiceImpl implements CategoryService {
     public String createCategory(CategoryDto categoryDto) {
 
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-        TypedQuery<Category> query = entityManager2
-                .createQuery("select c from Category c where c.value= :value ", Category.class)
-                .setParameter("value", categoryDto.getValue());
+        TypedQuery<Category> query = queryService.getCategoryValue(entityManager2, categoryDto.getValue());
         if (query.getResultList().size() != 0) {
             return "Category already exists";
 

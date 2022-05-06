@@ -9,6 +9,8 @@ import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Order;
 import gov.iti.jets.persistence.entities.Product;
 import gov.iti.jets.persistence.entities.User;
+import gov.iti.jets.persistence.entitiesservices.QueryService;
+import gov.iti.jets.persistence.entitiesservices.QueryServiceImpl;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.OrderService;
 import jakarta.jws.WebService;
@@ -22,12 +24,15 @@ public class OrderServiceImpl implements OrderService {
 
     private final static EntityManagerFactory entityManagerFactory = ManagerFactory.getEntityManagerFactory();
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private QueryService queryService = new QueryServiceImpl();
 
     @Override
     public String getAllOrders() {
+
+        TypedQuery<Order> query = queryService.getAllOrders(entityManager);
+
         List<OrderDto> orderDtoList = new ArrayList<OrderDto>();
 
-        TypedQuery<Order> query = entityManager.createQuery("select o from Order o", Order.class);
         List<Order> orderList = query.getResultList();
         OrderDto orderDto;
 
@@ -59,9 +64,7 @@ public class OrderServiceImpl implements OrderService {
     public String getOrderById(int userId) {
 
         try {
-            TypedQuery<Order> query = entityManager
-                    .createQuery("select o from Order o where o.user.id= :id ", Order.class)
-                    .setParameter("id", userId);
+            TypedQuery<Order> query = queryService.getOrderByUserId(entityManager, userId);
             Order order = query.getSingleResult();
             OrderDto orderDto = new OrderDto();
             orderDto.setId(order.getId());
@@ -87,22 +90,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String makeOrder(int userId) {
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
-        TypedQuery<User> query1 = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
-                .setParameter("id", userId);
+        TypedQuery<User> query1 = queryService.getUserById(entityManager2, userId);
+
         if (query1.getResultList().size() == 0) {
             return "user doesn't exist!!";
         }
-
-        TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.user.id= :id ", Order.class)
-                .setParameter("id", userId);
+        TypedQuery<Order> query = queryService.getOrderByUserId(entityManager2, userId);
         if (query.getResultList().size() != 0) {
 
             return "order already exists check it out by get Method";
         }
 
-        List<CartProducts> cartProductsList = getUserCart(entityManager);
+        List<CartProducts> cartProductsList = getUserCart(entityManager2);
         int totalPrice = 0;
         for (CartProducts cartProducts : cartProductsList) {
             if (cartProducts.getCartId().getUserId() == userId) {
@@ -125,25 +126,24 @@ public class OrderServiceImpl implements OrderService {
 
             return "cart is empty";
         }
-        EntityTransaction entityTransaction = entityManager.getTransaction();
+        EntityTransaction entityTransaction = entityManager2.getTransaction();
         entityTransaction.begin();
 
         Order order = new Order();
         order.setTotalPrice(totalPrice);
-        order.setUser(entityManager.find(User.class, userId));
-        entityManager.persist(order);
+        order.setUser(entityManager2.find(User.class, userId));
+        entityManager2.persist(order);
         entityTransaction.commit();
 
-        entityManager.close();
+        entityManager2.close();
         return "Order is created successfully";
 
     }
 
     @Override
     public String checkout(int userId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.user.id= :id ", Order.class)
-                .setParameter("id", userId);
+        EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+        TypedQuery<Order> query = queryService.getOrderByUserId(entityManager2, userId);
         if (query.getResultList().size() == 0) {
 
             return "Please place your order";
@@ -157,21 +157,21 @@ public class OrderServiceImpl implements OrderService {
             return "user doesn't have enough money";
         }
 
-        List<CartProducts> cartProductsList = getUserCart(entityManager);
-        EntityTransaction entityTransaction = entityManager.getTransaction();
+        List<CartProducts> cartProductsList = getUserCart(entityManager2);
+        EntityTransaction entityTransaction = entityManager2.getTransaction();
         entityTransaction.begin();
         int i = 0;
         for (CartProducts cartProducts : cartProductsList) {
 
             if (cartProducts.getCartId().getUserId() == userId) {
 
-                TypedQuery<Product> query2 = entityManager
-                        .createQuery("select p from Product p where p.id= :id ", Product.class)
-                        .setParameter("id", cartProducts.getCartId().getProductId());
+                TypedQuery<Product> query2 = queryService.getProductById(entityManager2,
+                        cartProducts.getCartId().getProductId());
+
                 Product product = query2.getSingleResult();
                 product.setQuantity(product.getQuantity() - cartProducts.getQuantity());
-                entityManager.persist(product);
-                entityManager.remove(cartProducts);
+                entityManager2.persist(product);
+                entityManager2.remove(cartProducts);
                 i++;
             }
         }
@@ -180,27 +180,25 @@ public class OrderServiceImpl implements OrderService {
             return "there is no cart !!";
         }
         user.setWallet(user.getWallet() - order.getTotalPrice());
-        entityManager.persist(user);
-        entityManager.remove(order);
+        entityManager2.persist(user);
+        entityManager2.remove(order);
         entityTransaction.commit();
-        entityManager.close();
+        entityManager2.close();
         return "Transaction done successfully";
     }
 
     @Override
     public String deleteOrder(int userId) {
         try {
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-            TypedQuery<Order> query = entityManager
-                    .createQuery("select o from Order o where o.user.id= :id ", Order.class)
-                    .setParameter("id", userId);
-            EntityTransaction entityTransaction = entityManager.getTransaction();
+            EntityManager entityManager2 = entityManagerFactory.createEntityManager();
+            TypedQuery<Order> query = queryService.getOrderByUserId(entityManager2, userId);
+            EntityTransaction entityTransaction = entityManager2.getTransaction();
             entityTransaction.begin();
             Order order = query.getSingleResult();
 
-            entityManager.remove(order);
+            entityManager2.remove(order);
             entityTransaction.commit();
-            entityManager.close();
+            entityManager2.close();
             return "user order deleted successfully";
         } catch (Exception e) {
 
@@ -209,16 +207,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String updateOrder( int userId) {
+    public String updateOrder(int userId) {
 
-       
-        TypedQuery<User> query1 = entityManager.createQuery("select u from User u where u.id= :id ", User.class)
-                .setParameter("id", userId);
+        TypedQuery<User> query1 = queryService.getUserById(entityManager, userId);
         if (query1.getResultList().size() == 0) {
             return "user doesn't exist!!";
         }
-        TypedQuery<Order> query = entityManager.createQuery("select o from Order o where o.user.id= :id ", Order.class)
-                .setParameter("id", userId);
+        TypedQuery<Order> query = queryService.getOrderByUserId(entityManager, userId);
         if (query.getResultList().size() == 0) {
 
             return "order doesn't exist";
@@ -255,13 +250,12 @@ public class OrderServiceImpl implements OrderService {
         entityManager.persist(order);
         entityTransaction.commit();
 
-        
         return "Order is updated successfully";
 
     }
 
     private List<CartProducts> getUserCart(EntityManager entityManager) {
-        TypedQuery<CartProducts> query2 = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
+        TypedQuery<CartProducts> query2 = queryService.getAllCarts(entityManager);
         List<CartProducts> cartProductsList = query2.getResultList();
 
         return cartProductsList;

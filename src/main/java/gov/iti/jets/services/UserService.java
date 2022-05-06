@@ -23,4 +23,6 @@ public interface UserService {
     @WebMethod
     public String upadateUserWallet(int id, UserWalletDto userWalletDto);
 
+    
+
 }

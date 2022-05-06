@@ -5,6 +5,7 @@ gov\iti\jets\dtos\CartDto.class
 gov\iti\jets\services\impl\CategoryServiceImpl.class
 gov\iti\jets\dtos\UserDto.class
 gov\iti\jets\persistence\util\ManagerFactory.class
+gov\iti\jets\persistence\entitiesservices\QueryService.class
 gov\iti\jets\dtos\ProductDto.class
 gov\iti\jets\dtos\UserWalletDto.class
 gov\iti\jets\services\CategoryService.class
@@ -20,6 +21,7 @@ gov\iti\jets\services\UserService.class
 gov\iti\jets\persistence\entities\Order.class
 gov\iti\jets\persistence\entities\Product.class
 gov\iti\jets\services\ProductService.class
+gov\iti\jets\persistence\entitiesservices\QueryServiceImpl.class
 gov\iti\jets\services\impl\OrderServiceImpl.class
 gov\iti\jets\dtos\CategoryDto.class
 gov\iti\jets\services\impl\ProductServiceImpl.class

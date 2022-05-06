@@ -7,8 +7,10 @@ import gov.iti.jets.dtos.CartDto;
 import gov.iti.jets.dtos.UserCart;
 import gov.iti.jets.persistence.entities.CartId;
 import gov.iti.jets.persistence.entities.CartProducts;
-import gov.iti.jets.persistence.entities.Order;
+
 import gov.iti.jets.persistence.entities.Product;
+import gov.iti.jets.persistence.entitiesservices.QueryService;
+import gov.iti.jets.persistence.entitiesservices.QueryServiceImpl;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.CartService;
 import jakarta.jws.WebService;
@@ -22,13 +24,13 @@ public class CartServiceImpl implements CartService {
 
     private final static EntityManagerFactory entityManagerFactory = ManagerFactory.getEntityManagerFactory();
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private QueryService queryService =new QueryServiceImpl();
 
     @Override
     public String getAllcarts() {
 
-        TypedQuery<CartProducts> query = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
+        TypedQuery<CartProducts> query = queryService.getAllCarts(entityManager); 
         List<CartDto> cartDtoList = new ArrayList<CartDto>();
-
         List<CartProducts> cartProductsList = query.getResultList();
         CartDto cartDto;
 
@@ -57,8 +59,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public String getUserCart(int userId) {
 
-        TypedQuery<CartProducts> query = entityManager.createQuery("select C from CartProducts C", CartProducts.class);
-
+        TypedQuery<CartProducts> query = queryService.getCartByUserId(entityManager, userId);
         List<CartProducts> cartProductsList = query.getResultList();
         UserCart userCart;
         List<Object> userCartList = new ArrayList<Object>();
@@ -89,9 +90,7 @@ public class CartServiceImpl implements CartService {
 
         try {
             EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-            TypedQuery<Product> query = entityManager2
-                    .createQuery("select p from Product p where p.name= :name ", Product.class)
-                    .setParameter("name", productName);
+            TypedQuery<Product> query = queryService.getProductByName(entityManager2, productName);
 
             Product product = query.getSingleResult();
 
@@ -109,9 +108,7 @@ public class CartServiceImpl implements CartService {
             cartId.setProductId(product.getId());
             cartId.setUserId(userId);
 
-            TypedQuery<CartProducts> query2 = entityManager2
-                    .createQuery("select c from CartProducts c where c.cartId= :cartId ", CartProducts.class)
-                    .setParameter("cartId", cartId);
+            TypedQuery<CartProducts> query2 = queryService.getCartByCartId(entityManager2, cartId);
 
             if (query2.getResultList().size() != 0) {
 
@@ -152,9 +149,7 @@ public class CartServiceImpl implements CartService {
     public String deleteCart(int userId) {
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
-        TypedQuery<CartProducts> query = entityManager2
-                .createQuery("select C from CartProducts C where C.user.id= :id ", CartProducts.class)
-                .setParameter("id", userId);
+        TypedQuery<CartProducts> query = queryService.getCartByUserId(entityManager2, userId);
         if (query.getResultList().size() == 0) {
             return "there is no cart to delete";
         }
@@ -179,11 +174,7 @@ public class CartServiceImpl implements CartService {
 
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
 
-        TypedQuery<CartProducts> query = entityManager2
-                .createQuery("select C from CartProducts C where C.user.id= :id and C.product.id= :pid",
-                        CartProducts.class)
-                .setParameter("id", userId)
-                .setParameter("pid", pId);
+        TypedQuery<CartProducts> query = queryService.getCartByUserAndProductIds(entityManager2, userId, pId);
         if (query.getResultList().size() == 0) {
             return "there is no product to delete";
         }

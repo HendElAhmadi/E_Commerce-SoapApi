@@ -8,6 +8,8 @@ import gov.iti.jets.dtos.ProductDto;
 import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Category;
 import gov.iti.jets.persistence.entities.Product;
+import gov.iti.jets.persistence.entitiesservices.QueryService;
+import gov.iti.jets.persistence.entitiesservices.QueryServiceImpl;
 import gov.iti.jets.persistence.util.ManagerFactory;
 import gov.iti.jets.services.ProductService;
 import jakarta.jws.WebService;
@@ -21,11 +23,13 @@ public class ProductServiceImpl implements ProductService {
 
     private final static EntityManagerFactory entityManagerFactory = ManagerFactory.getEntityManagerFactory();
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private QueryService queryService = new QueryServiceImpl();
+
 
     @Override
     public String getAllProducts() {
 
-        TypedQuery<Product> query = entityManager.createQuery("select p from Product p", Product.class);
+        TypedQuery<Product> query = queryService.getAllProducts(entityManager);        
         List<ProductDto> productDtoList = new ArrayList<ProductDto>();
 
         List<Product> productList = query.getResultList();
@@ -53,8 +57,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String getProduct(int id) {
 
-        TypedQuery<Product> query = entityManager.createQuery("select p from Product p where p.id= :id ", Product.class)
-                .setParameter("id", id);
+        TypedQuery<Product> query = queryService.getProductById(entityManager, id);
         try {
             Product product = query.getSingleResult();
 
@@ -76,10 +79,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String getProductByName(String name) {
-        TypedQuery<Product> query = entityManager
-                .createQuery("select p from Product p where  p.name= :name", Product.class)
 
-                .setParameter("name", name);
+        TypedQuery<Product> query = queryService.getProductByName(entityManager, name);
+
+             
         try {
             Product product = query.getSingleResult();
             ProductDto productDto = new ProductDto();
@@ -103,9 +106,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
 
-            TypedQuery<Product> query = entityManager
-                    .createQuery("select p from Product p where p.id= :id ", Product.class)
-                    .setParameter("id", id);
+            TypedQuery<Product> query = queryService.getProductById(entityManager, id);
             List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
 
             Product product = query.getSingleResult();
@@ -133,9 +134,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String createProduct(ProductDto productDto) {
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-        TypedQuery<Product> query = entityManager2
-                .createQuery("select p from Product p where p.name= :name ", Product.class)
-                .setParameter("name", productDto.getName());
+        TypedQuery<Product> query = queryService.getProductByName(entityManager2, productDto.getName());
         if (query.getResultList().size() != 0) {
             return "Product already exists";
 
@@ -160,18 +159,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String deleteProduct(int id) {
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-        TypedQuery<Product> query = entityManager2
-                .createQuery("select p from Product p where p.id= :id ", Product.class)
-                .setParameter("id", id);
+        TypedQuery<Product> query = queryService.getProductById(entityManager2, id);
 
         try {
             EntityTransaction entityTransaction = entityManager2.getTransaction();
             entityTransaction.begin();
             Product product = query.getSingleResult();
 
-            TypedQuery<CartProducts> query3 = entityManager2
-                    .createQuery("select C from CartProducts C where C.product.id= :id ", CartProducts.class)
-                    .setParameter("id", id);
+            TypedQuery<CartProducts> query3 = queryService.getCartByProductId(entityManager2, id);
 
             if (query3.getResultList().size() != 0) {
                 List<CartProducts>CartProductsList=query3.getResultList();
@@ -195,9 +190,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String updateProductQuantity(int id, int quantity) {
         EntityManager entityManager2 = entityManagerFactory.createEntityManager();
-        TypedQuery<Product> query = entityManager2
-                .createQuery("select p from Product p where p.id= :id ", Product.class)
-                .setParameter("id", id);
+        TypedQuery<Product> query = queryService.getProductById(entityManager2, id);
 
         try {
             EntityTransaction entityTransaction = entityManager2.getTransaction();
