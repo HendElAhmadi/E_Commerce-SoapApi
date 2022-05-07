@@ -81,8 +81,45 @@ This api gives E_Commerce services
 * MySQL DB
 * JPA
 
+# SOAP UI : 
+[SOAP-UI](/SOPA-Ecommerce-soapui-project.xml)
+
 # Postman documentation 
 [Postman_documentation](https://documenter.getpostman.com/view/20768348/UyxdL9EC)
+
+# MySQL Schema
+
+* Create a database user using MySQL Workbench:
+
+    1.log in to the MySQL Server using root user
+    
+    2.Create an empty schema eithe the provided name :ecommerce_schema
+   
+    3.Once you are logged in to the MySQL Database Server, in the left-hand window, under the ‘MANAGEMENT’ menu, 
+    there is a link for ‘Users and Privileges’. Open the Users and Privileges.
+    
+    4.click on the Users and Privileges
+    
+    5.to add a new user, click on the ‘Add Account’ button
+
+    6.give him a username :api and password api 
+    
+    7.in Limit to hosts matching write: localhost
+    
+    8.Then select the Account Limits 
+    
+    9.Then select the Schema Privileges tab
+    
+    10.you can also restrict or allow the new users to access certain databases or schemas from add Entry
+    
+    11.click on the Apply button to save the new user
+
+*  Go to (resources/META-INF/persistence.xml)and make the value of " hibernate.hbm2ddl.auto " property equals to  "create".
+*  Run App.java file  using the following maven command: => mvn clean compile exec:java
+*  After making sure the schema is created
+*  Go back to (resources/META-INF/persistence.xml)and make the value of " hibernate.hbm2ddl.auto " property equals to  "update".
+
+
 
 # ER Diagram
 ![](/ER_DIAGRAM.png)
