@@ -81,7 +81,8 @@ This api gives E_Commerce services
 * MySQL DB
 * JPA
 
-# You can apply requests through POSTMAN collection file
+# Postman documentation 
+[Postman_documentation](https://documenter.getpostman.com/view/20768348/UyxdL9EC)
 
 # ER Diagram
 ![](/ER_DIAGRAM.png)
