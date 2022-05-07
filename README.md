@@ -119,7 +119,10 @@ This api gives E_Commerce services
 *  After making sure the schema is created
 *  Go back to (resources/META-INF/persistence.xml)and make the value of " hibernate.hbm2ddl.auto " property equals to  "update".
 
+# In Maven 
 
+* Change the configuration of tomcat in `pom.xml` in your project with your localhost port.
+* Deploy your application using the following maven command: => mvn clean compile tomcat7:redeploy
 
 # ER Diagram
 ![](/ER_DIAGRAM.png)
