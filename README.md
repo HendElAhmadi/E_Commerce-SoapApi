@@ -81,12 +81,15 @@ This api gives E_Commerce services
 * MySQL DB
 * JPA
 
+# SOAP UI : 
+[SOAP-UI](/SOPA-Ecommerce-soapui-project.xml)
+
 # Postman documentation 
 [Postman_documentation](https://documenter.getpostman.com/view/20768348/UyxdL9EC)
 
 *MySQL Schema*
 
-
+SOPA-Ecommerce-soapui-project.xml
 
 # ER Diagram
 ![](/ER_DIAGRAM.png)
