@@ -94,6 +94,7 @@
         <version>3.0.0</version>
         <configuration>
           <mainClass>gov.iti.jets.App</mainClass>
+          <cleanupDaemonThreads>false</cleanupDaemonThreads>
         </configuration>
       </plugin>
       <plugin>
