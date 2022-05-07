@@ -3,8 +3,11 @@ package gov.iti.jets.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import gov.iti.jets.dtos.OrderDto;
 import gov.iti.jets.dtos.UserDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Order;
 import gov.iti.jets.persistence.entities.Product;
@@ -27,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     private QueryService queryService = new QueryServiceImpl();
 
     @Override
-    public String getAllOrders() {
+    public List<OrderDto> getAllOrders() throws NotFoundDtoException {
 
         TypedQuery<Order> query = queryService.getAllOrders(entityManager);
 
@@ -53,20 +56,21 @@ public class OrderServiceImpl implements OrderService {
             orderDtoList.add(orderDto);
         }
         if (orderDtoList.size() == 0) {
-            return "There are no orders!!";
+            throw new NotFoundDtoException("no orders found!!");
         }
 
-        return "\n All orders : \n" + orderDtoList;
+        return  orderDtoList;
 
     }
 
     @Override
-    public String getOrderById(int userId) {
+    public OrderDto getOrderById(int userId) throws NotFoundDtoException {
 
+       
         try {
             TypedQuery<Order> query = queryService.getOrderByUserId(entityManager, userId);
             Order order = query.getSingleResult();
-            OrderDto orderDto = new OrderDto();
+             OrderDto orderDto = new OrderDto();
             orderDto.setId(order.getId());
             orderDto.setTotalPrice(order.getTotalPrice());
             User user = order.getUser();
@@ -80,11 +84,12 @@ public class OrderServiceImpl implements OrderService {
             userDto.setPassword(user.getPassword());
             orderDto.setUserDto(userDto);
 
-            return orderDto.toString();
+            return orderDto;
         } catch (Exception e) {
 
-            return "There is no order!";
+            throw new NotFoundDtoException("There is no order!") ;
         }
+        
     }
 
     @Override

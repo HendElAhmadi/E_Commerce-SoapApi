@@ -1,6 +1,10 @@
 package gov.iti.jets.services;
 
+import java.util.List;
+
+import gov.iti.jets.dtos.CategoryDto;
 import gov.iti.jets.dtos.ProductDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 
@@ -8,16 +12,16 @@ import jakarta.jws.WebService;
 public interface ProductService {
 
     @WebMethod
-    public String getAllProducts();
+    public List<ProductDto> getAllProducts() throws NotFoundDtoException;
 
     @WebMethod
-    public String getProduct(int id);
+    public ProductDto getProduct(int id)throws NotFoundDtoException;
 
     @WebMethod
-    public String getProductByName(String name);
+    public ProductDto getProductByName(String name)throws NotFoundDtoException;
 
     @WebMethod
-    public String getCategories(Integer id);
+    public List<CategoryDto> getCategories(Integer id)throws NotFoundDtoException;
 
     @WebMethod
     public String createProduct(ProductDto productDto);

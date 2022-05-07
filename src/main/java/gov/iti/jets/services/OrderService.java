@@ -1,5 +1,9 @@
 package gov.iti.jets.services;
 
+import java.util.List;
+
+import gov.iti.jets.dtos.OrderDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 
@@ -7,10 +11,10 @@ import jakarta.jws.WebService;
 public interface OrderService {
 
     @WebMethod
-    public String getAllOrders();
+    public List<OrderDto> getAllOrders() throws NotFoundDtoException;
 
     @WebMethod
-    public String getOrderById(int userId);
+    public OrderDto getOrderById(int userId) throws NotFoundDtoException;
 
     @WebMethod
     public String makeOrder(int userId);

@@ -1,5 +1,10 @@
 package gov.iti.jets.services;
 
+import java.util.List;
+
+import gov.iti.jets.dtos.CartDto;
+import gov.iti.jets.dtos.UserCart;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 
@@ -7,10 +12,10 @@ import jakarta.jws.WebService;
 public interface CartService {
 
     @WebMethod
-    public String getAllcarts();
+    public List<CartDto> getAllcarts() throws NotFoundDtoException;
 
     @WebMethod
-    public String getUserCart(int userId);
+    public List<UserCart> getUserCart(int userId)throws NotFoundDtoException;
 
     @WebMethod
     public String addToCart(int userId, String productName, int quantity);

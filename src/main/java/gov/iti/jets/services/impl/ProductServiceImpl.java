@@ -5,6 +5,7 @@ import java.util.List;
 
 import gov.iti.jets.dtos.CategoryDto;
 import gov.iti.jets.dtos.ProductDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Category;
 import gov.iti.jets.persistence.entities.Product;
@@ -27,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public String getAllProducts() {
+    public List<ProductDto> getAllProducts() throws NotFoundDtoException {
 
         TypedQuery<Product> query = queryService.getAllProducts(entityManager);        
         List<ProductDto> productDtoList = new ArrayList<ProductDto>();
@@ -47,15 +48,15 @@ public class ProductServiceImpl implements ProductService {
         }
 
         if (productDtoList.size() == 0) {
-            return "There are no products";
+            throw new NotFoundDtoException("There are no products") ;
         }
 
-        return "\n All products : \n" + productDtoList;
+        return  productDtoList;
 
     }
 
     @Override
-    public String getProduct(int id) {
+    public ProductDto getProduct(int id) throws NotFoundDtoException {
 
         TypedQuery<Product> query = queryService.getProductById(entityManager, id);
         try {
@@ -70,15 +71,15 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDescription(product.getDescription());
             productDto.setPrice(product.getPrice());
 
-            return productDto.toString();
+            return productDto;
         } catch (Exception e) {
 
-            return "There is no products!";
+            throw new NotFoundDtoException("There is no products!") ;
         }
     }
 
     @Override
-    public String getProductByName(String name) {
+    public ProductDto getProductByName(String name) throws NotFoundDtoException {
 
         TypedQuery<Product> query = queryService.getProductByName(entityManager, name);
 
@@ -94,15 +95,16 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDescription(product.getDescription());
             productDto.setPrice(product.getPrice());
 
-            return productDto.toString();
+            return productDto;
         } catch (Exception e) {
 
-            return "There is no product with this name!";
+            throw new NotFoundDtoException("There is no product with this name!");
+            
         }
     }
 
     @Override
-    public String getCategories(Integer id) {
+    public List<CategoryDto> getCategories(Integer id) throws NotFoundDtoException {
 
         try {
 
@@ -119,13 +121,16 @@ public class ProductServiceImpl implements ProductService {
                 categoryDtoList.add(categoryDto);
             }
             if (categoryDtoList.size() == 0) {
-                return "There are no categories";
+
+                throw new NotFoundDtoException("There are no categories");
+                
             }
 
-            return "\n All categories : \n" + categoryDtoList;
+            return  categoryDtoList;
         } catch (Exception e) {
 
-            return "There is no product with this id";
+            throw new NotFoundDtoException("There is no product with this id");
+            
 
         }
 

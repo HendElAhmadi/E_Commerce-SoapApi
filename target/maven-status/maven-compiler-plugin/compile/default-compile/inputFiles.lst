@@ -1,5 +1,6 @@
 E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\dtos\UserWalletDto.java
 E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\services\impl\CartServiceImpl.java
+E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\exceptions\NotFoundDtoException.java
 E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\dtos\CartDto.java
 E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\persistence\entitiesservices\QueryServiceImpl.java
 E:\ITI-JETS\SOAP\labs\soap-E_Commerce-api\src\main\java\gov\iti\jets\services\CategoryService.java

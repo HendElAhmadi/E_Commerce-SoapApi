@@ -5,6 +5,7 @@ import java.util.List;
 
 import gov.iti.jets.dtos.UserDto;
 import gov.iti.jets.dtos.UserWalletDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import gov.iti.jets.persistence.entities.CartProducts;
 import gov.iti.jets.persistence.entities.Order;
 import gov.iti.jets.persistence.entities.User;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private QueryService queryService = new QueryServiceImpl();
     
     @Override
-    public String getAllUsers() {
+    public List<UserDto> getAllUsers() throws NotFoundDtoException {
         TypedQuery<User> query = queryService.getAllUsers(entityManager);
         List<UserDto> userDtoList = new ArrayList<UserDto>();
         
@@ -46,16 +47,17 @@ public class UserServiceImpl implements UserService {
                 userDtoList.add(userDto);
             }
             if (userDtoList.size() == 0) {
-                return "There are no users";
+                
+                throw new NotFoundDtoException("There are no users");
             }
 
-            return "\n All users : \n"+userDtoList;
+            return userDtoList;
 
         
     }
 
     @Override
-    public String getUserById(int id) {
+    public UserDto getUserById(int id) throws NotFoundDtoException {
 
         TypedQuery<User> query = queryService.getUserById(entityManager, id);
 
@@ -73,10 +75,11 @@ public class UserServiceImpl implements UserService {
 
             System.out.print(user);
 
-            return userDto.toString();
+            return userDto;
         } catch (Exception e) {
 
-            return "There is no user with this id!";
+             throw new NotFoundDtoException("There is no user with this id!");
+            
         }
     }
 

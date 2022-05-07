@@ -5,6 +5,7 @@ import java.util.List;
 
 import gov.iti.jets.dtos.CategoryDto;
 import gov.iti.jets.dtos.ProductDto;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import gov.iti.jets.persistence.entities.Category;
 import gov.iti.jets.persistence.entities.Product;
 import gov.iti.jets.persistence.entitiesservices.QueryService;
@@ -25,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     private QueryService queryService =new QueryServiceImpl();
 
     @Override
-    public String getAllCategories() {
+    public List<CategoryDto> getAllCategories() throws NotFoundDtoException {
 
         TypedQuery<Category> query = queryService.getAllCategories(entityManager);
         List<CategoryDto> categoryDtoList = new ArrayList<CategoryDto>();
@@ -56,15 +57,17 @@ public class CategoryServiceImpl implements CategoryService {
             categoryDtoList.add(categoryDto);
         }
         if (categoryDtoList.size() == 0) {
-            return "There are no categories";
+
+            throw new NotFoundDtoException("There are no categories");
+            
         }
 
-        return "\n All categories : \n" + categoryDtoList;
+        return categoryDtoList;
 
     }
 
     @Override
-    public String getCategory(int id) {
+    public CategoryDto getCategory(int id) throws NotFoundDtoException {
 
         TypedQuery<Category> query = queryService.getCategoryById(entityManager, id);
 
@@ -89,15 +92,16 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryDto.setProducts(productDtoList);
 
-            return categoryDto.toString();
+            return categoryDto;
         } catch (Exception e) {
 
-            return "There is no category with this id!";
+            throw new NotFoundDtoException("There is no category with this id!");
+           
         }
     }
 
     @Override
-    public String getProducts(Integer id) {
+    public List<ProductDto> getProducts(Integer id) throws NotFoundDtoException {
       TypedQuery<Category> query = queryService.getCategoryById(entityManager, id);
         List<ProductDto> productDtoList = new ArrayList<ProductDto>();
         try {
@@ -115,10 +119,11 @@ public class CategoryServiceImpl implements CategoryService {
             }
             
 
-            return "\n products list : \n" + productDtoList;
+            return productDtoList;
         } catch (Exception e) {
 
-            return "There are no products";
+            
+            throw new NotFoundDtoException("There are no products");
         }
     }
 

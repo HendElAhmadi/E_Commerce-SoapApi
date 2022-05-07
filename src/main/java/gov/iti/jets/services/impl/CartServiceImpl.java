@@ -5,6 +5,7 @@ import java.util.List;
 
 import gov.iti.jets.dtos.CartDto;
 import gov.iti.jets.dtos.UserCart;
+import gov.iti.jets.exceptions.NotFoundDtoException;
 import gov.iti.jets.persistence.entities.CartId;
 import gov.iti.jets.persistence.entities.CartProducts;
 
@@ -27,7 +28,7 @@ public class CartServiceImpl implements CartService {
     private QueryService queryService =new QueryServiceImpl();
 
     @Override
-    public String getAllcarts() {
+    public List<CartDto>getAllcarts() throws NotFoundDtoException {
 
         TypedQuery<CartProducts> query = queryService.getAllCarts(entityManager); 
         List<CartDto> cartDtoList = new ArrayList<CartDto>();
@@ -48,21 +49,22 @@ public class CartServiceImpl implements CartService {
 
         if (cartDtoList.size() == 0) {
 
-            return "there are no carts";
+           
+            throw new NotFoundDtoException("there are no carts");
 
         }
 
-        return "\n Carts : \n" + cartDtoList;
+        return cartDtoList;
 
     }
 
     @Override
-    public String getUserCart(int userId) {
+    public List<UserCart> getUserCart(int userId) throws NotFoundDtoException {
 
         TypedQuery<CartProducts> query = queryService.getCartByUserId(entityManager, userId);
         List<CartProducts> cartProductsList = query.getResultList();
         UserCart userCart;
-        List<Object> userCartList = new ArrayList<Object>();
+        List<UserCart> userCartList = new ArrayList<UserCart>();
         for (CartProducts cartProducts : cartProductsList) {
             if (cartProducts.getCartId().getUserId() == userId) {
 
@@ -79,10 +81,11 @@ public class CartServiceImpl implements CartService {
         }
         if (userCartList.size() == 0) {
 
-            return "cart is empty";
+            throw new NotFoundDtoException("cart is empty");
+            
         }
 
-        return "\n user's cart: \n" + userCartList.toString();
+        return userCartList;
     }
 
     @Override

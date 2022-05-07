@@ -17,6 +17,7 @@ gov\iti\jets\persistence\entities\User.class
 gov\iti\jets\services\OrderService.class
 gov\iti\jets\services\CartService.class
 gov\iti\jets\persistence\entities\CartProducts.class
+gov\iti\jets\exceptions\NotFoundDtoException.class
 gov\iti\jets\services\UserService.class
 gov\iti\jets\persistence\entities\Order.class
 gov\iti\jets\persistence\entities\Product.class
