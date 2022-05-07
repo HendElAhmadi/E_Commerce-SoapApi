@@ -84,5 +84,9 @@ This api gives E_Commerce services
 # Postman documentation 
 [Postman_documentation](https://documenter.getpostman.com/view/20768348/UyxdL9EC)
 
+*MySQL Schema*
+
+
+
 # ER Diagram
 ![](/ER_DIAGRAM.png)
