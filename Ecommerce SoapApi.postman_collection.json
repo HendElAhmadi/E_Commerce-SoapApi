@@ -2,688 +2,1820 @@
 	"info": {
 		"_postman_id": "f0bc2ca9-aa85-48f0-82f3-f129f3f00017",
 		"name": "Ecommerce SoapApi",
+		"description": "StartFragment\n\n# E_Commerce-SoapApi\n\n  \n\nEndFragment",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "get all users",
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "get user by id",
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "add user",
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "delete user",
-			"request": {
-				"method": "POST",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "upadateUserWallet",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
+			"name": "User",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get all users",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getAllUsers>\r\n      </x:getAllUsers>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"userService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"userService"
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "get user by id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getUserById>\r\n            <arg0>9</arg0>\r\n        </x:getUserById> \r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"userService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAll products",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProduct byId",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProduct>\r\n        <arg0>2</arg0>\r\n      </x:getProduct>\r\n    </soap:Body>\r\n</soap:Envelope>"
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "add user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:createUser>\r\n        <arg0>\r\n         <email>So2shon2@gmail.com</email>\r\n        <id>7</id>\r\n        <password>1834</password>\r\n        <phoneNumber>123126</phoneNumber>\r\n        <userName>shrouk</userName>\r\n        <userType>CLIENT</userType>\r\n        <wallet>300.0</wallet>     \r\n        </arg0>\r\n        </x:createUser>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"userService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Product by name",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProductByName>\r\n        <arg0>2</arg0>\r\n        <arg1>DARK</arg1>\r\n      </x:getProductByName>\r\n    </soap:Body>\r\n</soap:Envelope>"
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
+				{
+					"name": "delete user",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "delete user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteUser>\r\n            <arg0>12</arg0>   \r\n        </x:deleteUser>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"userService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get Categories by product id",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
+				{
+					"name": "upadateUserWallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"userService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "upadateUserWallet",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:upadateUserWallet>\r\n        <arg0>9</arg0>\r\n        <arg1>\r\n        <userWallet>10.0</userWallet>\r\n        </arg1>\r\n        </x:upadateUserWallet>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/userService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"userService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"description": "this service provides the following:\n\n1.  get all users\n2.  get user by userId\n3.  delete user by userId\n4.  add user by sending userDto\n5.  delete user by userId\n6.  update user wallet"
 		},
 		{
-			"name": "create Product",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
+			"name": "Product",
+			"item": [
+				{
+					"name": "getAll products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getAll products",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getAllProducts>\r\n      </x:getAllProducts>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete Product",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update Product Qunatitiy",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"productService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get All orders",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getOrderBy userId",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getOrderById>\r\n        <arg0></arg0>\r\n       </x:getOrderById>\r\n    </soap:Body>\r\n</soap:Envelope>"
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
+				{
+					"name": "getProduct byId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProduct>\r\n        <arg0>2</arg0>\r\n      </x:getProduct>\r\n    </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getProduct byId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProduct>\r\n        <arg0>2</arg0>\r\n      </x:getProduct>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "makeOrder by userId",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "updateOrder by userId",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "checkout byUser id",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n         <x:checkout>\r\n       </x:checkout>\r\n    </soap:Body>\r\n</soap:Envelope>"
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
+				{
+					"name": "get Product by name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProductByName>\r\n        <arg0>2</arg0>\r\n        <arg1>DARK</arg1>\r\n      </x:getProductByName>\r\n    </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get Product by name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProductByName>\r\n        <arg0>2</arg0>\r\n        <arg1>DARK</arg1>\r\n      </x:getProductByName>\r\n    </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteOrder by user id",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"orderService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllcarts",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"cartService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getUserCart by user id",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"cartService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "addToCart",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"cartService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteCart",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"cartService"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "deleteProductInCart",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"content-type": true
-				}
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteProductInCart>\r\n        <arg0>9</arg0>\r\n        <arg1>9</arg1>\r\n        </x:deleteProductInCart>\r\n    </soap:Body>\r\n</soap:Envelope>"
 				},
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"cartService"
+				{
+					"name": "get Categories by product id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get Categories by product id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getCategories>\r\n        <arg0>2</arg0>\r\n      </x:getCategories>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create Product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:createProduct>\r\n            <arg0>\r\n                <id>2</id>\r\n                <name>VILOT</name>\r\n                <description>Strong</description>\r\n                <quantity>20</quantity>\r\n                <price>300</price>        \r\n            </arg0>\r\n        </x:createProduct>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "delete Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete Product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteProduct>\r\n            <arg0>5</arg0>\r\n        </x:deleteProduct>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "update Product Qunatitiy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"productService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update Product Qunatitiy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:updateProductQuantity>\r\n            <arg0>2</arg0>\r\n            <arg1>20</arg1>\r\n        </x:updateProductQuantity>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/productService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"productService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"description": "Product service provides the following:\n\n1.  get all products\n2.  get product by productId\n3.  get product by productName\n4.  get list of product's categories by productId\n5.  create product by sending productDto\n6.  delete product by productId\n7.  update productQunatity by sending productId and the required quantity"
 		},
 		{
-			"name": "getAllCategories",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"categoryService"
+			"name": "Order",
+			"item": [
+				{
+					"name": "get All orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get All orders",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n         <x:getAllOrders>\r\n       </x:getAllOrders>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "getOrderBy userId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getOrderById>\r\n        <arg0></arg0>\r\n       </x:getOrderById>\r\n    </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getOrderBy userId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getOrderById>\r\n        <arg0></arg0>\r\n       </x:getOrderById>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "makeOrder by userId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "makeOrder by userId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n       <x:makeOrder>\r\n       <arg0>9</arg0>\r\n       </x:makeOrder>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "updateOrder by userId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "updateOrder by userId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n       <x:updateOrder>\r\n       <arg0>9</arg0>\r\n       </x:updateOrder>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "checkout byUser id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n         <x:checkout>\r\n       </x:checkout>\r\n    </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "checkout byUser id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n         <x:checkout>\r\n       </x:checkout>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "deleteOrder by user id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"orderService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "deleteOrder by user id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n       <x:deleteOrder>\r\n        <arg0>9</arg0>\r\n       </x:deleteOrder>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/orderService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"orderService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"description": "The order service provides the following:\n\nStartFragment\n\n1.  get all orders\n2.  get user's order by userId\n3.  make order by user's id\n4.  update order by user's id\n5.  checkout by userId\n6.  delete order by userId\n    \n\nEndFragment"
 		},
 		{
-			"name": "getCategory",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"categoryService"
+			"name": "Category",
+			"item": [
+				{
+					"name": "getAllCategories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"categoryService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getAllCategories",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getAllCategories>\r\n        </x:getAllCategories>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"categoryService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "getCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"categoryService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getCategory",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getCategory>\r\n        <arg0>6</arg0>\r\n        </x:getCategory>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"categoryService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "getProducts for category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"categoryService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getProducts for category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getProducts>\r\n        <arg0>1</arg0>\r\n        </x:getProducts>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"categoryService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "createCategory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"categoryService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "createCategory",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:createCategory>\r\n        <arg0>\r\n         <description>good for face</description>\r\n                <id>1</id>\r\n                <value>serumForFace</value>\r\n        </arg0>\r\n        </x:createCategory>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"categoryService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"description": "this service provides the following:\n\nStartFragment\n\n1.  get all categories\n2.  get category by categoryId\n3.  get list of category's products by categoryId\n4.  create cateogry by sending categoryDto\n    \n\nEndFragment"
 		},
 		{
-			"name": "getProducts for category",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"categoryService"
+			"name": "Cart",
+			"item": [
+				{
+					"name": "getAllcarts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"cartService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getAllcarts",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getAllcarts>\r\n        </x:getAllcarts>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"cartService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "getUserCart by user id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"cartService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getUserCart by user id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:getUserCart >\r\n        <arg0>19</arg0>\r\n        </x:getUserCart >\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"cartService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "addToCart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"cartService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "addToCart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:addToCart>\r\n        <arg0>9</arg0>\r\n        <arg1>red</arg1>\r\n        <arg2>5</arg2>\r\n        </x:addToCart>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"cartService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "deleteCart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"cartService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "deleteCart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteCart>\r\n        <arg0>9</arg0>\r\n        </x:deleteCart>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"cartService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "deleteProductInCart",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteProductInCart>\r\n        <arg0>9</arg0>\r\n        <arg1>9</arg1>\r\n        </x:deleteProductInCart>\r\n    </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9797",
+							"path": [
+								"SoapE_CommerceService",
+								"ws",
+								"cartService"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "deleteProductInCart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version='1.0' encoding='UTF-8'?>\r\n<soap:Envelope\r\n    xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n    xmlns:x=\"http://services.jets.iti.gov/\">\r\n    <soap:Body>\r\n        <x:deleteProductInCart>\r\n        <arg0>9</arg0>\r\n        <arg1>9</arg1>\r\n        </x:deleteProductInCart>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9797/SoapE_CommerceService/ws/cartService",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9797",
+									"path": [
+										"SoapE_CommerceService",
+										"ws",
+										"cartService"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "createCategory",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "text/xml",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:9797/SoapE_CommerceService/ws/categoryService",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9797",
-					"path": [
-						"SoapE_CommerceService",
-						"ws",
-						"categoryService"
-					]
-				}
-			},
-			"response": []
+			],
+			"description": "The cart service provides the following:\n\nStartFragment\n\n1.  get all carts\n2.  get list of user's cart items by userId\n3.  add to cart by sending userId, productName, the required quantity of that product\n4.  delete cart by userId\n5.  delete product from cart by userId and productId\n    \n\nEndFragment"
 		}
 	]
 }
