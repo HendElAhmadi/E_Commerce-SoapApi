@@ -121,7 +121,5 @@ This api gives E_Commerce services
 
 
 
-SOPA-Ecommerce-soapui-project.xml
-
 # ER Diagram
 ![](/ER_DIAGRAM.png)
